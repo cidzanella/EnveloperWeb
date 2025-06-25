@@ -1,0 +1,46 @@
+# ===== .NET =====
+**/[Bb]in/
+**/[Oo]bj/
+**/.vs/
+**/*.user
+**/*.suo
+**/*.userosscache
+**/*.sln.docstates
+*.db
+*.sqlite
+*.mdb
+*.pdb
+*.cache
+*.log
+
+# App settings locais
+appsettings.Development.json
+appsettings.*.json
+secrets.json
+
+# Rider (JetBrains)
+.idea/
+
+# ===== Angular =====
+node_modules/
+dist/
+tmp/
+.cache/
+.angular/
+coverage/
+
+# IDEs e editores
+.vscode/
+*.swp
+*.swo
+*.bak
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
