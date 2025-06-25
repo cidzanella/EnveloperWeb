@@ -1,7 +1,7 @@
 ﻿using EnveloperWeb.Domain.Entities;
 using System.Threading.Tasks;
 
-namespace EnveloperWeb.Domain.Contracts
+namespace EnveloperWeb.Domain.Contracts.Repositories
 {
     public interface IUserRepository
     {

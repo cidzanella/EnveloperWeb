@@ -1,0 +1,21 @@
+﻿using System.Threading.Tasks;
+using EnveloperWeb.Application.DTOs;
+using EnveloperWeb.Domain.Contracts.Repositories;
+
+namespace EnveloperWeb.Application.Services.EnvelopeServices.Consulta
+{
+    public class BuscarEnvelopePorIdService : IBuscarEnvelopePorIdService
+    {
+        private readonly IEnvelopeRepository _repository;
+
+        public BuscarEnvelopePorIdService(IEnvelopeRepository repository)
+        {
+            _repository = repository;
+        }
+
+        public async Task<EnvelopeDetalhadoDto> BuscarAsync(int id)
+        {
+            return await _repository.BuscarEnvelopeDetalhadoAsync(id);
+        }
+    }
+}
