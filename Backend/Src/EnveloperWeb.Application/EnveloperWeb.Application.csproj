@@ -10,4 +10,9 @@
     <ProjectReference Include="..\EnveloperWeb.Domain\EnveloperWeb.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\AlertasServices\" />
+    <Folder Include="Services\UsuariosServices\" />
+  </ItemGroup>
+
 </Project>
