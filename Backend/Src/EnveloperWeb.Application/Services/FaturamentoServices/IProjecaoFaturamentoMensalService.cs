@@ -1,7 +1,7 @@
-﻿namespace EnveloperWeb.Application.Services.FaturamentoServices
+﻿namespace EnveloperWeb.Application.FaturamentoServices
 {
     public interface IProjecaoFaturamentoMensalService
     {
-        double CalcularProjecao(int ano, int mes);
+        Task<double> CalcularAsync(int ano, int mes);
     }
 }
