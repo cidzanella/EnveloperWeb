@@ -11,8 +11,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\AlertasServices\" />
-    <Folder Include="Services\UsuariosServices\" />
+    <Folder Include="Alertas\Contracts\" />
+    <Folder Include="Alertas\DTOs\" />
+    <Folder Include="Alertas\Services\" />
+    <Folder Include="Envelopes\ConclusaoEnvelope\DTOs\" />
+    <Folder Include="Logs\" />
+    <Folder Include="Configuracoes\" />
+    <Folder Include="PDVs\" />
+    <Folder Include="Usuarios\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="12.0.0" />
   </ItemGroup>
 
 </Project>
