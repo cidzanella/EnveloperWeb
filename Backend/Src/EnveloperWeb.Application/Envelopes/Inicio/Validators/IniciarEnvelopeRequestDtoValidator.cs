@@ -1,10 +1,11 @@
 ﻿using FluentValidation;
-using EnveloperWeb.Application.Envelopes.InicioEnvelope.Dtos;
+using EnveloperWeb.Application.Envelopes.Inicio.DTOs;
 
-namespace EnveloperWeb.Application.Envelopes.InicioEnvelope.Validators
+namespace EnveloperWeb.Application.Envelopes.Inicio.Validators
 {
     public class IniciarEnvelopeRequestDtoValidator : AbstractValidator<IniciarEnvelopeRequestDto>
     {
+        // FLuentValidation: valida no controller (via [ApiController] + ModelState)
         public IniciarEnvelopeRequestDtoValidator()
         {
             RuleFor(x => x.PDVId)

@@ -1,4 +1,4 @@
-﻿namespace EnveloperWeb.Application.Envelopes.InicioEnvelope.Dtos
+﻿namespace EnveloperWeb.Application.Envelopes.Inicio.DTOs
 {
     public class IniciarEnvelopeRequestDto
     {
@@ -7,5 +7,6 @@
         public DateTime DataHoraInicio { get; set; }
         public decimal DinheiroInicial { get; set; }
         public string Observacao { get; set; }
+        public bool ForcarIniciarComDivergencia { get; set; } = false; // permite forçar a abertura mesmo com divergência
     }
 }
