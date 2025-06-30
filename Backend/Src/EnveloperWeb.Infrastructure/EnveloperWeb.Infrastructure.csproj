@@ -11,6 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ExternalServices\Messaging\" />
+    <Folder Include="ExternalServices\Weather\" />
     <Folder Include="Persistance\Migrations\" />
   </ItemGroup>
 

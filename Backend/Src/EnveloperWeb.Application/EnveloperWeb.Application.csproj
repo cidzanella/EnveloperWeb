@@ -14,7 +14,6 @@
     <Folder Include="Alertas\Contracts\" />
     <Folder Include="Alertas\DTOs\" />
     <Folder Include="Alertas\Services\" />
-    <Folder Include="Envelopes\ConclusaoEnvelope\DTOs\" />
     <Folder Include="Logs\" />
     <Folder Include="Configuracoes\" />
     <Folder Include="PDVs\" />
@@ -22,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="FluentValidation" Version="12.0.0" />
   </ItemGroup>
 

@@ -1,5 +1,6 @@
 ﻿using EnveloperWeb.Domain.Envelopes.Contracts;
 using EnveloperWeb.Domain.Envelopes.Entities;
+using EnveloperWeb.Domain.Envelopes.Filters;
 using EnveloperWeb.Infrastructure.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -17,14 +18,38 @@ namespace EnveloperWeb.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Envelope>> ObterTodosAsync()
+        public async Task<IEnumerable<Envelope>> ListarEnvelopesResumoAsync(EnvelopeFiltroConsulta filtro)
         {
-            return await _context.Envelopes.ToListAsync();
+            var query = _context.Envelopes.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(filtro.PdvNome))
+                query = query.Where(e => e.PDV == filtro.PdvNome);
+
+            if (filtro.TurnoId.HasValue)
+                query = query.Where(e => e.TurnoId == filtro.TurnoId.Value);
+
+            if (filtro.SomenteConcluidos)
+                query = query.Where(e => e.DataHoraConclusao.HasValue);
+
+            return await query
+                .OrderByDescending(e => e.DataHoraInicio)
+                .ToListAsync();
         }
 
         public async Task<Envelope> ObterPorIdAsync(int id)
         {
+            // Somente entity "crua", sem includes
             return await _context.Envelopes.FindAsync(id);
+        }
+
+        public async Task<Envelope> ObterPorIdComDadosCompletosAsync(int id)
+        {
+            return await _context.Envelopes
+                .Include(e => e.Turno)
+                .Include(e => e.Clima)
+                .Include(e => e.Responsaveis)
+                    .ThenInclude(r => r.Usuario)
+                .FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public async Task AdicionarAsync(Envelope envelope)
@@ -61,5 +86,14 @@ namespace EnveloperWeb.Infrastructure.Repositories
                 .OrderByDescending(e => e.DataHoraConclusao)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<IEnumerable<Envelope>> ListarEnvelopesNaoConferidosAsync()
+        {
+            return await _context.Envelopes
+                .Where(e => !e.EnvelopeConferido)
+                .OrderByDescending(e => e.DataHoraConclusao)
+                .ToListAsync();
+        }
+
     }
 }
