@@ -4,6 +4,9 @@
     /// Utilizado pela camada de Application para listar envelopes conforme os parâmetros fornecidos.
     public class EnvelopeFiltroConsulta
     {
+        public int? Ano { get; set; }
+        public int? Mes { get; set; }
+        public int PdvId { get; set; }
         public string PdvNome { get; set; }
         public int? TurnoId { get; set; }
         public bool SomenteConcluidos { get; set; }

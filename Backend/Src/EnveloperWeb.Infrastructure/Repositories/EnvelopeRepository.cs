@@ -1,4 +1,5 @@
-﻿using EnveloperWeb.Domain.Envelopes.Contracts;
+﻿using EnveloperWeb.Domain.Envelopes.DTOs;
+using EnveloperWeb.Domain.Envelopes.Contracts;
 using EnveloperWeb.Domain.Envelopes.Entities;
 using EnveloperWeb.Domain.Envelopes.Filters;
 using EnveloperWeb.Infrastructure.Persistance.Context;
@@ -30,6 +31,13 @@ namespace EnveloperWeb.Infrastructure.Repositories
 
             if (filtro.SomenteConcluidos)
                 query = query.Where(e => e.DataHoraConclusao.HasValue);
+
+            if (filtro.Ano.HasValue && filtro.Mes.HasValue)
+            {
+                var inicio = new DateTime(filtro.Ano.Value, filtro.Mes.Value, 1);
+                var fim = inicio.AddMonths(1).AddDays(-1);
+                query = query.Where(e => e.DataHoraConclusao >= inicio && e.DataHoraConclusao <= fim);
+            }
 
             return await query
                 .OrderByDescending(e => e.DataHoraInicio)
@@ -92,6 +100,22 @@ namespace EnveloperWeb.Infrastructure.Repositories
             return await _context.Envelopes
                 .Where(e => !e.EnvelopeConferido)
                 .OrderByDescending(e => e.DataHoraConclusao)
+                .ToListAsync();
+        }
+
+        public async Task<List<FaturamentoDiarioDto>> ObterFaturamentoDiarioDoMesAsync(int ano, int mes)
+        {
+            return await _context.Envelopes
+                .Where(e => e.DataHoraConclusao.HasValue &&
+                            e.DataHoraConclusao.Value.Year == ano &&
+                            e.DataHoraConclusao.Value.Month == mes)
+                .GroupBy(e => e.DataHoraConclusao.Value.Date)
+                .Select(g => new FaturamentoDiarioDto
+                {
+                    Data = g.Key,
+                    Faturamento = g.Sum(e => e.Faturamento)
+                })
+                .OrderBy(f => f.Data)
                 .ToListAsync();
         }
 

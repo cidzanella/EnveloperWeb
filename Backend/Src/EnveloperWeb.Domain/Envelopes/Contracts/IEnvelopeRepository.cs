@@ -1,4 +1,5 @@
-﻿using EnveloperWeb.Domain.Envelopes.Entities;
+﻿using EnveloperWeb.Domain.Envelopes.DTOs;
+using EnveloperWeb.Domain.Envelopes.Entities;
 using EnveloperWeb.Domain.Envelopes.Filters;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace EnveloperWeb.Domain.Envelopes.Contracts
         Task<bool> ExisteEnvelopeIniciadoNoPDVAsync(int pdvId);
         Task<Envelope> ObterUltimoEnvelopeFechadoNoPDVAsync(int pdvId);
         Task<IEnumerable<Envelope>> ListarEnvelopesNaoConferidosAsync();
+        Task<List<FaturamentoDiarioDto>> ObterFaturamentoDiarioDoMesAsync(int ano, int mes);
 
     }
 }
